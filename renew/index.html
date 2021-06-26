@@ -1,0 +1,75 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row d-flex justify-content-center" style="margin-top: 140px">
+        <div class="col-md-6" >
+            <div class="jumbotron " >
+                <div class="alert alert-success" id="success" style="display:none" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="alert-heading">Congratulations!</h4>
+                    <p> You successfully  renew the package .</p>
+
+                </div>
+                <div class="container">
+                        <h1 class="display-5">License Renewal</h1>
+                        <hr>
+                        <form >
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <input type="password" name="license_key" class="form-control" id="license_key" placeholder="License Key" required>
+                                    </div>
+
+                                    <div class="col-md-3" >
+                                        <button type="button"  id="key" class="btn btn-primary" style="margin-left: -10px">Submit</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $( document ).ready(function() {
+        $(document).on('click','#key',function (){
+          var data =$('form').serialize();
+            $.ajax({
+
+                url : "renew.php",
+                type: "POST",
+                data : data,
+                //cors: true ,
+               // contentType:'application/json',
+               // secure: true,
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                },
+                success: function(response) {
+                  $('#success').show();
+                    $('form :input').val('');
+                },
+
+            });
+        })
+    });
+</script>
+
+</body>
+</html>
